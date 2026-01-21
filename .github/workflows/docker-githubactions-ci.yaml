@@ -8,7 +8,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: build-image
-        run: docker build -t saitejadocker/helloworld-demo-python:v1 .
+        run: docker build -t ${{ vars.DOCKER_USERNAME }}/helloworld-demo-python:v1 .
 
       - name: docker-image-list
         run: docker images
@@ -20,4 +20,4 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: docker-image-pushing
-        run: docker push saiteja11407/helloworld-demo-python:v1
+        run: docker push ${{ vars.DOCKER_USERNAME }}/helloworld-demo-python:v1
