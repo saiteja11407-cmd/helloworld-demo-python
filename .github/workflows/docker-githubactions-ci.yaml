@@ -14,13 +14,13 @@ jobs:
         run: docker images
 
       - name: create-container
-        run: docker run --name demo-python-app -idt -p 8000:8080 ${{ vars.DOCKER_USERNAME }}/helloworld-demo-python:v2
+        run: docker run --name demo-python-app -idt -p 8000:8080 ${{ vars.DOCKER_USERNAME }}/helloworld-demo-python:v1
 
       - name: check-container-status
         run: docker ps
 
       - name: checking-container-using-curl
-        run: curl http://localhost:8080
+        run: curl -x http://localhost:8080
 
       - name: docker-login
         uses: docker/login-action@v3.6.0
