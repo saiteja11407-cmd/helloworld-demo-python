@@ -23,7 +23,7 @@ jobs:
         run: sleep 20
 
       - name: checking-container-using-curl
-        run: curl http://localhost:8080
+        run: curl -f http://localhost:8080
 
       - name: docker-login
         uses: docker/login-action@v3.6.0
