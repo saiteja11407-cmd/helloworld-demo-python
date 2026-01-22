@@ -1,5 +1,7 @@
 name: docker-githubactions-ci
 on: push
+paths-ignore:
+  - '**.md'
 jobs:
   dockerci-job:
     runs-on: ubuntu-latest
