@@ -1,0 +1,5 @@
+# this is for namespace yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: python-app
