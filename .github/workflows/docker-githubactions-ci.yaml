@@ -57,9 +57,7 @@ jobs:
         
       - name: apply-yaml
         run: |
-          kubectl apply -f k8s/namespace.yaml
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/py-np-service.yaml
+          kubectl apply -f k8s/.
 
       - name: Wait
         run: |
