@@ -67,7 +67,7 @@ jobs:
       - name: Wait
         run: |
           kubectl get ns
-          kubectl wait --for=condition=ready pod -l app=pythonapp
+          kubectl wait --for=condition=ready pod -l app=python-app-11407
      # - name: apply-yaml
      #   run: |
       #    kubectl apply -f k8s/.
