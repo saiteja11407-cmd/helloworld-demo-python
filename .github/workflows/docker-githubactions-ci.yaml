@@ -66,6 +66,7 @@ jobs:
 
       - name: Wait
         run: |
+          kubectl get ns
           kubectl wait --for=condition=ready pod -l app=pythonapp
      # - name: apply-yaml
      #   run: |
