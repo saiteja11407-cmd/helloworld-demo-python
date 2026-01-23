@@ -55,13 +55,14 @@ jobs:
       - name: test-minikube
         run: kubectl get pods -A
         
-      - name: apply-yaml
-        run: |
-          kubectl apply -f k8s/.
+     # - name: apply-yaml
+     #   run: |
+      #    kubectl apply -f k8s/.
 
-      - name: Wait
+      - name: apply-yamls
         run: |
           kubectl config set-context --current --namespace=python-app-11407
+          kubectl apply -f k8s/.
           kubectl wait --for=condition=ready pod -l app=pythonapp
  #        run: sleep 30
         
