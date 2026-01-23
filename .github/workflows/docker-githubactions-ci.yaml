@@ -58,6 +58,7 @@ jobs:
       - name: apply-yaml-files
         run: |
           kubectl apply -f k8s/.
+          sleep 10
           kubectl config set-context --current --namespace=python-app
           kubectl wait --for=condition=ready pod -l app=myapp-demo
 
