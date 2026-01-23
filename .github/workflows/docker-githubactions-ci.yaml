@@ -54,16 +54,30 @@ jobs:
 
       - name: test-minikube
         run: kubectl get pods -A
-        
+
+      - name: apply-yaml
+        run: |
+          kubectl apply -f k8s/devops-demo-namespace.yaml
+          kubectl apply -f k8s/devops-demo-deployment.yaml
+          kubectl apply -f k8s/devops-demo-service-nodeport.yaml
+
+      - name: set namespace
+        run: kubectl config set-context --current --namespace=python-app-11407
+
+      - name: Wait
+        run: |
+          kubectl wait --for=condition=ready pod -l app=pythonapp
      # - name: apply-yaml
      #   run: |
       #    kubectl apply -f k8s/.
 
-      - name: apply-yamls
-        run: |
-          kubectl config set-context --current --namespace=python-app-11407
-          kubectl apply -f k8s/.
-          kubectl wait --for=condition=ready pod -l app=pythonapp
+    #  - name: apply-yamls
+     #   run: |
+       #   kubectl config set-context --current --namespace=python-app-11407
+       #   kubectl apply -f k8s/devops-demo-deployment.yaml
+       #   kubectl apply -f k8s/devops-demo-namespace.yaml
+       #   kubectl apply -f k8s/devops-demo-service-nodeport.yaml
+        #  kubectl wait --for=condition=ready pod -l app=pythonapp
  #        run: sleep 30
         
       - name: get status
