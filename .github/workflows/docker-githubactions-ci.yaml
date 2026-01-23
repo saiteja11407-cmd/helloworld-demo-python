@@ -56,12 +56,10 @@ jobs:
         run: kubectl get pods -A
         
       - name: apply-yaml-files
-        run: |
-          kubectl apply -f k8s/.
-          kubectl get ns
-          sleep 30
-          kubectl config set-context --current --namespace=python-app
-          kubectl wait --for=condition=ready pod -l app=myapp-demo
+        run: kubectl apply -f k8s/.
+
+      - name: get-status
+        run: kubectl wait --for=condition=ready pod -l app=myapp-demo
 
       - name: get-status-deployments
         run: | 
