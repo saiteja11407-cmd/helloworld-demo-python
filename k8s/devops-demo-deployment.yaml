@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devops-myapp-deployment
-  namespace: python-app
   labels:
     app: nginx
 spec:
