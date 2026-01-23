@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-myapp-deployment
+  namespace: python-app
+  labels:
+    app: nginx
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: myapp-demo
+  template:
+    metadata:
+      labels:
+        app: myapp-demo
+    spec:
+      containers:
+      - name: myapp-demo
+        image: saiteja11407/helloworld-demo-python:v1
+        ports:
+        - containerPort: 8080
