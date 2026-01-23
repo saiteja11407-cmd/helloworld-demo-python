@@ -1,6 +1,6 @@
 name: docker-githubactions-ci
 on:
-  --push:
+  push:
     paths-ignore:
       - 'README*'
       - 'CONTRIBUTION*'
@@ -55,20 +55,29 @@ jobs:
       - name: test-minikube
         run: kubectl get pods -A
         
-      - name: apply-yaml-files
-        run: kubectl apply -f k8s/.
-
-      - name: get-status
-        run: kubectl wait --for=condition=ready pod -l app=myapp-demo
-
-      - name: get-status-deployments
-        run: | 
-          kubectl get ns
-          kubectl get deploy,service -n python-app
-
-      - name: Test service URLs
+      - name: apply-yaml
         run: |
+          kubectl apply -f k8s/namespace.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/py-np-service.yaml
+
+      - name: Wait
+        run: |
+          kubectl config set-context --current --namespace=python-app-11407
+          kubectl wait --for=condition=ready pod -l app=pythonapp
+ #        run: sleep 30
+        
+      - name: get status
+        run: |
+          kubectl get ns
+          kubectl get svc -n python-app-11407
+          kubectl get pods -n python-app-11407 -o wide 
+          kubectl get pods --show-labels
+      
+      - name: test the app
+        run: | 
           minikube service list
-          minikube service my-service --url
+          # minikube service py-np-service --url
+          minikube service py-np-service -n python-app-11407 --url
           echo -n "------------------opening the service------------------"
-          curl -f $(minikube service my-service --url)
+          curl $(minikube service py-np-service -n python-app-11407 --url)/version
