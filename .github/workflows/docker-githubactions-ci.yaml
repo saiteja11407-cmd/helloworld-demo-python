@@ -59,7 +59,7 @@ jobs:
         run: |
           kubectl apply -f k8s/.
           kubectl get ns
-          sleep 10
+          sleep 30
           kubectl config set-context --current --namespace=python-app
           kubectl wait --for=condition=ready pod -l app=myapp-demo
 
