@@ -1,6 +1,6 @@
 name: docker-githubactions-ci
 on:
-  push:
+  --push:
     paths-ignore:
       - 'README*'
       - 'CONTRIBUTION*'
